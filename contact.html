@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | SharaSpot</title>
+    <style>
+        :root {
+            --sage-green: #447ec4;
+            --powder-blue: #68a6ba;
+            --light-bg: #f8fbfd;
+            --dark-text: #2d3748;
+            --light-text: #718096;
+            --accent-glow: rgba(68, 126, 196, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background elements */
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--accent-glow);
+            z-index: -1;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .wave-bg {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,133.3C672,128,768,160,864,176C960,192,1056,192,1152,176C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            transform: scaleX(-1);
+        }
+
+        .home-button {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid var(--sage-green);
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--sage-green);
+            text-decoration: none;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(68, 126, 196, 0.1);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .home-button:hover {
+            background: var(--sage-green);
+            color: white;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(68, 126, 196, 0.3);
+        }
+
+        .home-button::before {
+            content: "←";
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .home-button:hover::before {
+            transform: translateX(-3px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--sage-green);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--powder-blue);
+            border-radius: 2px;
+            animation: glowPulse 2s infinite alternate;
+        }
+
+        .header p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .contact-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(104, 166, 186, 0.2);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(68, 126, 196, 0.15);
+            border-color: var(--powder-blue);
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0%;
+            background: var(--sage-green);
+            transition: height 0.4s ease;
+        }
+
+        .contact-card:hover::before {
+            height: 100%;
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--sage-green);
+            margin-bottom: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-card h3::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--powder-blue), transparent);
+        }
+
+        .contact-info {
+            margin-bottom: 25px;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .contact-info a {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--sage-green);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact-info a:hover {
+            color: var(--powder-blue);
+            transform: translateX(5px);
+        }
+
+        .contact-description {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .hours-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(104, 166, 186, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hours-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--sage-green), var(--powder-blue));
+        }
+
+        .hours-section h2 {
+            font-size: 2rem;
+            color: var(--sage-green);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hours-section p {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--powder-blue);
+            margin-bottom: 15px;
+        }
+
+        .hours-description {
+            color: var(--light-text);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .pulse-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: var(--sage-green);
+            border-radius: 50%;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes glowPulse {
+            0% {
+                box-shadow: 0 0 10px var(--powder-blue);
+            }
+            100% {
+                box-shadow: 0 0 20px var(--powder-blue), 0 0 30px rgba(104, 166, 186, 0.4);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .home-button {
+                top: 15px;
+                right: 15px;
+                padding: 10px 18px;
+                font-size: 0.8rem;
+            }
+            
+            .container {
+                padding: 30px 15px;
+            }
+            
+            .header {
+                margin-bottom: 40px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .contact-card {
+                padding: 25px 20px;
+            }
+            
+            .contact-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .hours-section {
+                padding: 30px 20px;
+            }
+            
+            .hours-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .hours-section p {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Floating animation for decorative elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.7;
+            animation: float 6s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        /* Custom cursor for desktop */
+        .custom-cursor {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--sage-green);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease, background 0.3s ease;
+            mix-blend-mode: difference;
+            opacity: 0.7;
+            display: none;
+        }
+
+        @media (min-width: 769px) {
+            .custom-cursor {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <a href="index.html" class="home-button">Return to Homepage</a>
+    <div class="wave-bg"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Get in Touch</h1>
+            <p>Have questions about SharaSpot? We're here to help. Reach out to us through any of the channels below.</p>
+        </div>
+
+        <div class="contact-section">
+            <div class="contact-card">
+                <h3>Phone</h3>
+                <div class="contact-info">
+                    <p>Call us anytime</p>
+                    <a href="tel:+919790294221">+91 9790294221</a>
+                </div>
+                <p class="contact-description">Our customer service team is ready to assist you with any questions or concerns you may have.</p>
+            </div>
+
+            <div class="contact-card">
+                <h3>Support Email</h3>
+                <div class="contact-info">
+                    <p>Get help with your account</p>
+                    <a href="mailto:support@folonite.in">support@folonite.in</a>
+                </div>
+                <p class="contact-description">Send us an email and we'll get back to you within 24 hours with a detailed solution.</p>
+            </div>
+
+            <div class="contact-card">
+                <h3>Partnership</h3>
+                <div class="contact-info">
+                    <p>Business inquiries</p>
+                    <a href="mailto:partner@folonite.in">partner@folonite.in</a>
+                </div>
+                <p class="contact-description">Interested in collaborating? We'd love to hear from you and explore partnership opportunities.</p>
+            </div>
+        </div>
+
+        <div class="hours-section">
+            <h2>Business Hours <span class="pulse-dot"></span></h2>
+            <p>24/7 Support</p>
+            <p class="hours-description">We're always here to help. Our dedicated support team is available around the clock to ensure you have the best experience with SharaSpot.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create floating decorative circles
+            createFloatingCircles();
+            
+            // Custom cursor for desktop
+            const cursor = document.querySelector('.custom-cursor');
+            if (cursor) {
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                    
+                    if (e.target.closest('.contact-card') || 
+                        e.target.closest('.home-button') || 
+                        e.target.closest('a')) {
+                        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                        cursor.style.background = 'rgba(68, 126, 196, 0.3)';
+                    } else {
+                        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                        cursor.style.background = 'transparent';
+                    }
+                });
+            }
+            
+            // Add hover effect to contact cards
+            const contactCards = document.querySelectorAll('.contact-card');
+            contactCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.setProperty('--hover-scale', '1.03');
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.setProperty('--hover-scale', '1');
+                });
+            });
+            
+            // Add subtle animation to header
+            const header = document.querySelector('.header h1');
+            header.style.opacity = '0';
+            header.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                header.style.transition = 'all 0.8s ease';
+                header.style.opacity = '1';
+                header.style.transform = 'translateY(0)';
+            }, 300);
+            
+            // Animate cards on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.contact-card, .hours-section').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+        function createFloatingCircles() {
+            // Create 8 floating circles
+            for (let i = 0; i < 8; i++) {
+                const circle = document.createElement('div');
+                circle.className = 'floating-circle';
+                
+                // Random size between 50px and 200px
+                const size = 50 + Math.random() * 150;
+                circle.style.width = `${size}px`;
+                circle.style.height = `${size}px`;
+                
+                // Random position
+                circle.style.left = `${Math.random() * 100}%`;
+                circle.style.top = `${Math.random() * 100}%`;
+                
+                // Random color between sage-green and powder-blue
+                const colorIntensity = 0.2 + Math.random() * 0.3;
+                if (Math.random() > 0.5) {
+                    circle.style.background = `rgba(68, 126, 196, ${colorIntensity})`;
+                } else {
+                    circle.style.background = `rgba(104, 166, 186, ${colorIntensity})`;
+                }
+                
+                // Animation with random duration and delay
+                const duration = 15 + Math.random() * 20;
+                const delay = Math.random() * 10;
+                circle.style.animation = `float ${duration}s ease-in-out infinite`;
+                circle.style.animationDelay = `${delay}s`;
+                
+                document.body.appendChild(circle);
+            }
+        }
+    </script>
+</body>
+</html>
