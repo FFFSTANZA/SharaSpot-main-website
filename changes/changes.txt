@@ -1,0 +1,22 @@
+Website Re-tuning Plan : 
+
+1. Optimize the entire website for mobile devices.
+2. Move the footer into a separate file, so the footer, header, and navigation bar can be easily included across all pages.
+3. Improve the contact page and add a consistent header and footer.
+4. Add a form to the contact page.
+5. Redesign and update the footer.
+6. Connect the newsletter to the homepage.
+7. Replace the service page with a "Partner With Us" page.
+
+Pages to be developed from scratch:
+
+* Terms of Service page
+* Privacy Policy page
+* City Manager page
+* Partner With Us page
+* List Your Spot page
+
+
+For terms of service and Privacy Policy, I will provide the content later. 
+
+Use quality images, provide enough space and stcrtured text alignment... Make the pages lenghthy with images and responsive animated. 
