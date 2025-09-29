@@ -101,6 +101,10 @@
   box-sizing: border-box;
 }
 
+* {
+  max-width: 100%;
+}
+
 li { list-style: none; }
 
 a,
@@ -123,9 +127,24 @@ button {
   font: inherit;
 }
 
-input { width: 100%; }
+input { 
+  width: 100%; 
+  min-height: 44px;
+  padding: 12px 16px;
+  border-radius: var(--radius-5);
+  font-size: 16px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
 
-button { cursor: pointer; }
+button { 
+  cursor: pointer; 
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
 
 ion-icon { pointer-events: none; }
 
@@ -135,6 +154,10 @@ html {
   font-family: var(--ff-nunito_sans);
   font-size: 10px;
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -143,6 +166,10 @@ body {
   font-size: 1.6rem;
   line-height: 1.7;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  max-width: 100vw;
 }
 
 :focus-visible { outline-offset: 4px; }
@@ -163,7 +190,13 @@ body {
   #REUSED STYLE
 \*-----------------------------------*/
 
-.container { padding-inline: 16px; }
+.container { 
+  padding-inline: 16px; 
+  max-width: 100%;
+  margin-inline: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
 
 .section { padding-block: var(--section-padding); }
 
@@ -208,6 +241,10 @@ body {
   border-radius: var(--radius-20) 0;
   line-height: 1.4;
   transition: var(--transition-1);
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn:is(:hover, :focus-visible) {
@@ -371,7 +408,16 @@ body {
   align-items: center;
 }
 
-.nav-toggle-btn { font-size: 3rem; }
+.nav-toggle-btn { 
+  font-size: 3rem; 
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
 
 .nav-toggle-btn.active .open,
 .nav-toggle-btn .close { display: none; }
@@ -405,7 +451,12 @@ body {
   font-size: var(--fs-10);
   font-weight: var(--fw-700);
   text-transform: uppercase;
-  padding: 10px 15px;
+  padding: 15px 20px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -449,7 +500,12 @@ body {
   color: var(--black);
 }
 
-.hero-banner { margin-block-end: -15%; }
+.hero-banner { 
+  margin-block-end: -15%; 
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
 
 
 
@@ -816,6 +872,12 @@ body {
   border-radius: var(--radius-5);
   margin-block: 8px 20px;
   outline: none;
+  min-height: 44px;
+  font-size: 16px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
 }
 
 .footer .btn:is(:hover, :focus-visible) {
@@ -929,6 +991,14 @@ body {
   border: 3px solid var(--white);
   opacity: 0;
   transition: var(--transition-1);
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 10;
 }
 
 .back-top-btn.active {
@@ -943,6 +1013,424 @@ body {
 /*-----------------------------------*\
   #MEDIA QUERIES
 \*-----------------------------------*/
+
+/**
+ * responsive for mobile phones (max-width: 480px)
+ */
+
+@media (max-width: 480px) {
+
+  /**
+   * CUSTOM PROPERTY
+   */
+
+  :root {
+    --fs-1: 4rem;
+    --fs-2: 2.8rem;
+    --fs-3: 2.4rem;
+    --fs-4: 2rem;
+    --fs-5: 1.8rem;
+    --fs-6: 1.6rem;
+    --fs-7: 1.4rem;
+    --fs-8: 1.3rem;
+    --fs-9: 1.2rem;
+    --fs-10: 1.1rem;
+    --fs-11: 1rem;
+    --section-padding: 30px;
+  }
+
+  /**
+   * REUSED STYLE
+   */
+
+  .container { padding-inline: 12px; }
+
+  .btn {
+    padding: 15px 25px;
+    font-size: 0.9rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.9rem;
+    padding-inline-start: 15px;
+  }
+
+  .section-subtitle::before {
+    width: 8px;
+    height: 8px;
+  }
+
+  /**
+   * HEADER
+   */
+
+  .header { padding-block: 20px; }
+
+  .nav-toggle-btn { font-size: 2.5rem; }
+
+  .navbar-link {
+    font-size: 1rem;
+    padding: 12px 15px;
+  }
+
+  /**
+   * HERO
+   */
+
+  .hero {
+    padding-block: calc(var(--section-padding) + 80px) 0;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+    line-height: 1.3;
+    margin-block-end: 20px;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .hero .btn { 
+    margin-block-start: 20px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /**
+   * ABOUT
+   */
+
+  .about .section-title {
+    font-size: 2rem;
+    margin-block: 8px 20px;
+  }
+
+  .about-wrapper {
+    margin-block: 25px 20px;
+    gap: 15px;
+  }
+
+  .about-card .title-wrapper ion-icon {
+    font-size: 3rem;
+  }
+
+  .about-card .card-title {
+    font-size: 1.2rem;
+  }
+
+  .about-item ion-icon {
+    font-size: 1.6rem;
+  }
+
+  .about .btn { margin-block-start: 30px; }
+
+  /**
+   * STATS
+   */
+
+  .stats-card {
+    padding-inline: 20px;
+  }
+
+  .stats-card .card-title {
+    font-size: 3rem;
+  }
+
+  .stats-card .card-text {
+    font-size: 1rem;
+  }
+
+  .stats-banner {
+    height: 250px;
+  }
+
+  .play-btn {
+    font-size: 24px;
+    padding: 15px;
+  }
+
+  /**
+   * SERVICE
+   */
+
+  .service .section-title {
+    font-size: 2rem;
+    margin-block-end: 40px;
+  }
+
+  .service-item {
+    gap: 15px;
+  }
+
+  .service-item .card-icon {
+    min-width: 60px;
+    height: 65px;
+  }
+
+  .service-item ion-icon {
+    font-size: 3.5rem;
+  }
+
+  .service-item .card-title {
+    font-size: 1.1rem;
+  }
+
+  /**
+   * CTA
+   */
+
+  .cta-card {
+    padding: 30px 20px 25px;
+  }
+
+  .cta-card .card-title {
+    font-size: 2rem;
+  }
+
+  .cta-card .card-text {
+    margin-block: 8px 20px;
+  }
+
+  .cta-banner {
+    height: 200px;
+  }
+
+  /**
+   * BLOG
+   */
+
+  .blog .section-title {
+    font-size: 2rem;
+  }
+
+  .blog-card .card-content {
+    margin-inline-start: 20px;
+    margin-block-start: -30px;
+    padding: 20px 25px;
+  }
+
+  .blog-card .publish-date {
+    padding: 4px 15px;
+    font-size: 0.8rem;
+  }
+
+  .blog-card .card-title {
+    font-size: 1.1rem;
+  }
+
+  /**
+   * CONTACT
+   */
+
+  .contact {
+    padding-block: 30px 80px;
+  }
+
+  .contact-card ion-icon {
+    font-size: 3.5rem;
+  }
+
+  /**
+   * FOOTER
+   */
+
+  .newsletter-card {
+    padding: 20px;
+    margin-block-start: -100px;
+  }
+
+  .newsletter-card ion-icon {
+    font-size: 4rem;
+  }
+
+  .newsletter-card .card-title {
+    font-size: 1.3rem;
+    margin-block: 8px 20px;
+  }
+
+  .email-field {
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+
+  .footer .h6 {
+    font-size: 1.1rem;
+    margin-block-end: 15px;
+    padding-block-end: 15px;
+  }
+
+  .footer .h6::after {
+    width: 40px;
+    height: 3px;
+  }
+
+  .footer-link {
+    font-size: 1rem;
+  }
+
+  .contact-link {
+    font-size: 1.3rem;
+  }
+
+  .footer-bottom {
+    padding: 30px 20px;
+    font-size: 0.9rem;
+  }
+
+  .social-link {
+    width: 50px;
+    height: 50px;
+  }
+
+  /**
+   * BACK TO TOP
+   */
+
+  .back-top-btn {
+    bottom: 15px;
+    right: 15px;
+    font-size: 1.6rem;
+    padding: 8px;
+  }
+
+}
+
+/**
+ * responsive for small mobile phones (max-width: 360px)
+ */
+
+@media (max-width: 360px) {
+
+  :root {
+    --fs-1: 3.5rem;
+    --fs-2: 2.4rem;
+    --fs-3: 2rem;
+    --fs-4: 1.8rem;
+    --fs-5: 1.6rem;
+    --fs-6: 1.4rem;
+    --fs-7: 1.2rem;
+    --fs-8: 1.1rem;
+    --fs-9: 1rem;
+    --fs-10: 0.9rem;
+    --fs-11: 0.8rem;
+    --section-padding: 25px;
+  }
+
+  .container { padding-inline: 10px; }
+
+  .btn {
+    padding: 12px 20px;
+    font-size: 0.8rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: 1.9rem;
+  }
+
+  .about .section-title {
+    font-size: 1.8rem;
+  }
+
+  .service .section-title {
+    font-size: 1.8rem;
+  }
+
+  .cta-card .card-title {
+    font-size: 1.8rem;
+  }
+
+  .blog .section-title {
+    font-size: 1.8rem;
+  }
+
+  .stats-card .card-title {
+    font-size: 2.5rem;
+  }
+
+  .newsletter-card .card-title {
+    font-size: 1.1rem;
+  }
+
+  .footer .h6 {
+    font-size: 1rem;
+  }
+
+}
+
+/**
+ * responsive for medium mobile phones (max-width: 575px)
+ */
+
+@media (max-width: 575px) {
+  
+  .container { padding-inline: 14px; }
+  
+  .hero .container {
+    gap: 25px;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  .about .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .service .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .cta-card .card-title {
+    font-size: 2.2rem;
+  }
+  
+  .blog .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .stats-card .card-title {
+    font-size: 3.5rem;
+  }
+  
+  .btn {
+    padding: 16px 30px;
+    font-size: 0.9rem;
+  }
+  
+  .service-item .card-icon {
+    min-width: 70px;
+    height: 75px;
+  }
+  
+  .service-item ion-icon {
+    font-size: 4rem;
+  }
+  
+  .about-card .title-wrapper ion-icon {
+    font-size: 3.5rem;
+  }
+  
+  .contact-card ion-icon {
+    font-size: 4rem;
+  }
+  
+  .newsletter-card ion-icon {
+    font-size: 5rem;
+  }
+  
+  .footer .h6 {
+    font-size: 1.2rem;
+  }
+  
+  .social-link {
+    width: 55px;
+    height: 55px;
+  }
+  
+}
 
 /**
  * responsive for large than 575px screen
