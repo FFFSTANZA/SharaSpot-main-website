@@ -1,527 +1,837 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | SharaSpot</title>
-    <style>
-        :root {
-            --sage-green: #447ec4;
-            --powder-blue: #68a6ba;
-            --light-bg: #f8fbfd;
-            --dark-text: #2d3748;
-            --light-text: #718096;
-            --accent-glow: rgba(68, 126, 196, 0.15);
-        }
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <!-- 
+    - primary meta tags
+  -->
+  <title>Contact Us | SharaSpot</title>
+  <meta name="title" content="Contact Us - SharaSpot">
+  <meta name="description"
+    content="Get in touch with SharaSpot. Contact us for support, partnerships, or any questions about our EV charging platform.">
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--light-bg);
-            color: var(--dark-text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
 
-        /* Animated background elements */
-        .floating-circle {
-            position: absolute;
-            border-radius: 50%;
-            background: var(--accent-glow);
-            z-index: -1;
-            opacity: 0.5;
-            pointer-events: none;
-        }
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
 
-        .wave-bg {
-            position: absolute;
-            width: 100%;
-            height: 100px;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,133.3C672,128,768,160,864,176C960,192,1056,192,1152,176C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover;
-            transform: scaleX(-1);
-        }
+  <!-- 
+    - custom font link
+  -->
+  <link rel="stylesheet" href="./assets/font/font.css">
+  <!-- Add this in <head> -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
 
-        .home-button {
-            position: fixed;
-            top: 25px;
-            right: 25px;
-            padding: 12px 24px;
-            background: white;
-            border: 2px solid var(--sage-green);
-            border-radius: 30px;
-            font-weight: 600;
-            color: var(--sage-green);
-            text-decoration: none;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(68, 126, 196, 0.1);
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+  <!-- 
+    - preload images
+  -->
+  <link rel="preload" as="image" href="./assets/images/loading.png">
+  <link rel="preload" as="image" href="./assets/images/loading-circle.svg">
 
-        .home-button:hover {
-            background: var(--sage-green);
-            color: white;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 30px rgba(68, 126, 196, 0.3);
-        }
+  <style>
+    /* Contact page specific styles - matching other pages */
+    .contact-form-section {
+      padding: 0 0 var(--section-padding) 0;
+    }
 
-        .home-button::before {
-            content: "←";
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
+    .form-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
-        .home-button:hover::before {
-            transform: translateX(-3px);
-        }
+    .contact-form-card {
+      background: var(--white);
+      border-radius: var(--radius-30);
+      padding: 3rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--light-gray);
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-        }
+    .form-title {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
 
-        .header {
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-        }
+    .form-title h2 {
+      font-size: var(--fs-2);
+      color: var(--rich-black-fogra-29);
+      margin-bottom: 1rem;
+      font-weight: var(--fw-700);
+      font-family: var(--ff-quicksand);
+    }
 
-        .header h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            color: var(--sage-green);
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
+    .form-title p {
+      color: var(--black-coral);
+      font-size: var(--fs-8);
+      line-height: 1.6;
+    }
 
-        .header h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--powder-blue);
-            border-radius: 2px;
-            animation: glowPulse 2s infinite alternate;
-        }
+    .contact-form {
+      display: grid;
+      gap: 1.5rem;
+    }
 
-        .header p {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: var(--light-text);
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
 
-        .contact-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
+    .form-group label {
+      display: block;
+      color: var(--rich-black-fogra-29);
+      font-family: var(--ff-quicksand);
+      font-weight: var(--fw-600);
+      margin-bottom: 0.5rem;
+      font-size: var(--fs-10);
+    }
 
-        .contact-card {
-            background: white;
-            border-radius: 20px;
-            padding: 35px 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(104, 166, 186, 0.2);
-        }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid var(--light-gray);
+      border-radius: var(--radius-5);
+      font-size: var(--fs-10);
+      font-family: var(--ff-nunito_sans);
+      transition: var(--transition-1);
+    }
 
-        .contact-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(68, 126, 196, 0.15);
-            border-color: var(--powder-blue);
-        }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--yellow-green);
+      box-shadow: 0 0 0 3px hsla(86, 54%, 51%, 0.1);
+    }
 
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 0%;
-            background: var(--sage-green);
-            transition: height 0.4s ease;
-        }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
 
-        .contact-card:hover::before {
-            height: 100%;
-        }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
 
-        .contact-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--sage-green);
-            margin-bottom: 20px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
 
-        .contact-card h3::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(to right, var(--powder-blue), transparent);
-        }
+      .contact-form-card {
+        padding: 2rem 1.5rem;
+      }
+    }
 
-        .contact-info {
-            margin-bottom: 25px;
-        }
+    .submit-btn {
+      background: #447ec4 !important;
+      background-color: #447ec4 !important;
+      color: white !important;
+      border: none;
+      padding: 1.2rem 3rem;
+      border-radius: 50px;
+      font-size: var(--fs-8);
+      font-weight: var(--fw-600);
+      cursor: pointer;
+      transition: var(--transition-2);
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 2rem auto 0;
+      width: 100%;
+      max-width: 400px;
+      font-family: var(--ff-quicksand);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      visibility: visible;
+      opacity: 1;
+      z-index: 10;
+      position: relative;
+    }
 
-        .contact-info p {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--dark-text);
-        }
+    .submit-btn:hover {
+      background: #22c55e !important;
+      background-color: #22c55e !important;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(34, 197, 94, 0.4);
+    }
 
-        .contact-info a {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--sage-green);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: block;
-            margin-bottom: 5px;
-        }
+    .submit-btn:focus {
+      outline: 2px solid var(--yellow-green);
+      outline-offset: 2px;
+    }
 
-        .contact-info a:hover {
-            color: var(--powder-blue);
-            transform: translateX(5px);
-        }
+    .submit-btn:disabled {
+      background: #94a3b8 !important;
+      background-color: #94a3b8 !important;
+      cursor: not-allowed;
+      transform: none;
+    }
 
-        .contact-description {
-            color: var(--light-text);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
+    .submit-btn:disabled:hover {
+      background: #94a3b8 !important;
+      background-color: #94a3b8 !important;
+      transform: none;
+      box-shadow: none;
+    }
 
-        .hours-section {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(104, 166, 186, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
+    .loading-icon {
+      animation: spin 1s linear infinite;
+    }
 
-        .hours-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--sage-green), var(--powder-blue));
-        }
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
 
-        .hours-section h2 {
-            font-size: 2rem;
-            color: var(--sage-green);
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-        .hours-section p {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--powder-blue);
-            margin-bottom: 15px;
-        }
+    /* Contact info cards styling */
+    .contact-info-section {
+      padding: 60px 0;
+      background: #f8fbfd;
+    }
 
-        .hours-description {
-            color: var(--light-text);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
+    .contact-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-        .pulse-dot {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background: var(--sage-green);
-            border-radius: 50%;
-            margin-left: 10px;
-            animation: pulse 2s infinite;
-        }
+    .contact-info-card {
+      background: white;
+      border-radius: 20px;
+      padding: 35px 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(104, 166, 186, 0.2);
+      text-align: center;
+    }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.3);
-                opacity: 0.7;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
+    .contact-info-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(68, 126, 196, 0.15);
+      border-color: var(--powder-blue);
+    }
 
-        @keyframes glowPulse {
-            0% {
-                box-shadow: 0 0 10px var(--powder-blue);
-            }
-            100% {
-                box-shadow: 0 0 20px var(--powder-blue), 0 0 30px rgba(104, 166, 186, 0.4);
-            }
-        }
+    .contact-info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 0%;
+      background: var(--sage-green);
+      transition: height 0.4s ease;
+    }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
+    .contact-info-card:hover::before {
+      height: 100%;
+    }
 
-        /* Mobile responsive adjustments */
-        @media (max-width: 768px) {
-            .home-button {
-                top: 15px;
-                right: 15px;
-                padding: 10px 18px;
-                font-size: 0.8rem;
-            }
-            
-            .container {
-                padding: 30px 15px;
-            }
-            
-            .header {
-                margin-bottom: 40px;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .header p {
-                font-size: 1rem;
-            }
-            
-            .contact-card {
-                padding: 25px 20px;
-            }
-            
-            .contact-card h3 {
-                font-size: 1.3rem;
-            }
-            
-            .hours-section {
-                padding: 30px 20px;
-            }
-            
-            .hours-section h2 {
-                font-size: 1.5rem;
-            }
-            
-            .hours-section p {
-                font-size: 1.1rem;
-            }
-        }
+    .contact-info-card .card-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--sage-green), var(--powder-blue));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: white;
+      font-size: 1.5rem;
+    }
 
-        /* Floating animation for decorative elements */
-        .floating-element {
-            position: absolute;
-            opacity: 0.7;
-            animation: float 6s ease-in-out infinite;
-            z-index: -1;
-        }
+    .contact-info-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--sage-green);
+      margin-bottom: 15px;
+    }
 
-        /* Custom cursor for desktop */
-        .custom-cursor {
-            position: fixed;
-            width: 30px;
-            height: 30px;
-            border: 2px solid var(--sage-green);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease, background 0.3s ease;
-            mix-blend-mode: difference;
-            opacity: 0.7;
-            display: none;
-        }
+    .contact-info-card p {
+      color: var(--light-text);
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
 
-        @media (min-width: 769px) {
-            .custom-cursor {
-                display: block;
-            }
-        }
-    </style>
+    .contact-info-card a {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--sage-green);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .contact-info-card a:hover {
+      color: var(--powder-blue);
+    }
+
+    /* Page header */
+    .page-header {
+      text-align: center;
+      padding: 120px 0 40px;
+      background: linear-gradient(135deg, #f8fbfd 0%, #ffffff 100%);
+    }
+
+    .page-header h1 {
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 800;
+      color: var(--sage-green);
+      margin-bottom: 5px;
+      margin-top: 2rem;
+    }
+
+    .page-header p {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--light-text);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* Success message */
+    .success-message {
+      background: #d4edda;
+      color: #155724;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #c3e6cb;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    /* Custom cursor for desktop */
+    .custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--sage-green);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease-out, background 0.3s ease;
+      mix-blend-mode: difference;
+      opacity: 0.7;
+      display: none;
+    }
+
+    .custom-cursor.focused {
+      transform: translate(-50%, -50%) scale(1.5);
+      background: rgba(68, 126, 196, 0.2);
+    }
+
+
+    @media (min-width: 769px) {
+      .custom-cursor {
+        display: block;
+      }
+    }
+  </style>
 </head>
-<body>
-    <div class="custom-cursor"></div>
-    <a href="index.html" class="home-button">Return to Homepage</a>
-    <div class="wave-bg"></div>
-    
+
+<body id="top">
+  <div class="custom-cursor"></div>
+
+  <!-- 
+     - #PRELOADER
+   -->
+
+  <div class="preload-box" data-preloader>
+    <img src="./assets/images/loading.png" width="45" height="45" alt="loading">
+
+    <img src="./assets/images/loading-circle.svg" width="75" height="75" alt="loading" class="preload-circle">
+  </div>
+
+  <!-- 
+    - #HEADER
+  -->
+
+  <header class="header" data-header>
     <div class="container">
-        <div class="header">
-            <h1>Get in Touch</h1>
-            <p>Have questions about SharaSpot? We're here to help. Reach out to us through any of the channels below.</p>
-        </div>
 
-        <div class="contact-section">
-            <div class="contact-card">
-                <h3>Phone</h3>
-                <div class="contact-info">
-                    <p>Call us anytime</p>
-                    <a href="tel:+919790294221">+91 9790294221</a>
-                </div>
-                <p class="contact-description">Our customer service team is ready to assist you with any questions or concerns you may have.</p>
-            </div>
+      <!-- Logo + Brand Text -->
+      <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 8px;">
+        <img src="./assets/images/loading.png" width="60" height="60" alt="SharaSpot home">
+        <span style="
+          color: rgb(232, 224, 224);
+          font-family: 'Cormorant Garamond', serif;
+          font-style: italic;
+          font-weight: 400;
+          font-size: 3rem;
+          letter-spacing: 1.5px;
+          text-shadow: 0 1px 3px rgba(0,0,0,0.15);
+          transition: all 0.3s ease;
+        " onmouseover="this.style.color='#ffffff'; this.style.textShadow='0 2px 5px rgba(0,0,0,0.2)';"
+          onmouseout="this.style.color='rgb(232, 224, 224)'; this.style.textShadow='0 1px 3px rgba(0,0,0,0.15)';">SharaSpot</span>
+      </a>
 
-            <div class="contact-card">
-                <h3>Support Email</h3>
-                <div class="contact-info">
-                    <p>Get help with your account</p>
-                    <a href="mailto:support@folonite.in">support@folonite.in</a>
-                </div>
-                <p class="contact-description">Send us an email and we'll get back to you within 24 hours with a detailed solution.</p>
-            </div>
+      <!-- Navigation -->
+      <nav class="navbar" data-navbar>
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <a href="index.html" class="navbar-link">Home</a>
+          </li>
+          <li class="navbar-item">
+            <a href="partner.html" class="navbar-link">Partner with us</a>
+          </li>
+          <li class="navbar-item">
+            <a href="findspot.html" class="navbar-link">City Manager</a>
+          </li>
+          <li class="navbar-item">
+            <a href="listspot.html" class="navbar-link">List Your Spot</a>
+          </li>
+          <li class="navbar-item">
+            <a href="contact.html" class="navbar-link active">Contact Us</a>
+          </li>
+        </ul>
+      </nav>
 
-            <div class="contact-card">
-                <h3>Partnership</h3>
-                <div class="contact-info">
-                    <p>Business inquiries</p>
-                    <a href="mailto:partner@folonite.in">partner@folonite.in</a>
-                </div>
-                <p class="contact-description">Interested in collaborating? We'd love to hear from you and explore partnership opportunities.</p>
-            </div>
-        </div>
+      <!-- Header Action Buttons -->
+      <div class="header-action">
+        <a href="tel:+916026004732" class="contact-number">
+          <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+          <span class="span">+91 6026004732</span>
+        </a>
 
-        <div class="hours-section">
-            <h2>Business Hours <span class="pulse-dot"></span></h2>
-            <p>24/7 Support</p>
-            <p class="hours-description">We're always here to help. Our dedicated support team is available around the clock to ensure you have the best experience with SharaSpot.</p>
-        </div>
+        <a href="#" class="btn btn-primary">
+          <span class="span">Chat on WhatsApp</span>
+          <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+        </a>
+      </div>
+
+      <!-- Mobile Toggle Button -->
+      <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
+        <ion-icon name="menu-outline" aria-hidden="true" class="open"></ion-icon>
+        <ion-icon name="close-outline" aria-hidden="true" class="close"></ion-icon>
+      </button>
+
     </div>
+  </header>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Create floating decorative circles
-            createFloatingCircles();
-            
-            // Custom cursor for desktop
-            const cursor = document.querySelector('.custom-cursor');
-            if (cursor) {
-                document.addEventListener('mousemove', (e) => {
-                    cursor.style.left = e.clientX + 'px';
-                    cursor.style.top = e.clientY + 'px';
-                    
-                    if (e.target.closest('.contact-card') || 
-                        e.target.closest('.home-button') || 
-                        e.target.closest('a')) {
-                        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                        cursor.style.background = 'rgba(68, 126, 196, 0.3)';
-                    } else {
-                        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                        cursor.style.background = 'transparent';
-                    }
-                });
+  <main>
+    <article>
+
+      <!-- Page Header -->
+      <section class="page-header">
+        <div class="container">
+          <h1>Get in Touch</h1>
+          <p>Have questions about SharaSpot? We're here to help. Reach out to us through any of the channels below or
+            fill out our contact form.</p>
+        </div>
+      </section>
+
+      <!-- Contact Form Section -->
+      <section class="contact-form-section">
+        <div class="form-container">
+          <div class="contact-form-card">
+            <div class="form-title">
+              <h2>Send us a Message</h2>
+              <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+            </div>
+
+            <div class="success-message" id="successMessage">
+              Thank you for your message! We'll get back to you soon.
+            </div>
+
+            <form action="https://formspree.io/f/xldpolld" method="POST" class="contact-form application-form"
+              id="contactForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">First Name *</label>
+                  <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name *</label>
+                  <input type="text" id="lastName" name="lastName" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email">Email Address *</label>
+                  <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" name="phone">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="subject">Subject *</label>
+                <select id="subject" name="subject" required>
+                  <option value="">Select a subject</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="support">Technical Support</option>
+                  <option value="partnership">Partnership Opportunity</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" placeholder="Tell us how we can help you..." required></textarea>
+              </div>
+
+              <button type="submit" class="submit-btn" id="submitBtn">
+                <span class="btn-text">Send Message</span>
+                <span class="btn-loading" style="display: none;">
+                  <ion-icon name="hourglass-outline" class="loading-icon"></ion-icon>
+                  Sending...
+                </span>
+                <ion-icon name="send-outline" class="btn-icon"></ion-icon>
+              </button>
+            </form>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Information Section -->
+      <section class="contact-info-section">
+        <div class="container">
+          <div class="contact-info-grid">
+            <div class="contact-info-card">
+              <div class="card-icon">
+                <ion-icon name="call-outline"></ion-icon>
+              </div>
+              <h3>Phone Support</h3>
+              <p>Call us anytime for immediate assistance</p>
+              <a href="tel:+916026004732">+91 6026004732</a>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="card-icon">
+                <ion-icon name="mail-outline"></ion-icon>
+              </div>
+              <h3>Email Support</h3>
+              <p>Get help with your account and general inquiries</p>
+              <a href="mailto:support@sharaspot.com">support@sharaspot.com</a>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="card-icon">
+                <ion-icon name="business-outline"></ion-icon>
+              </div>
+              <h3>Partnership</h3>
+              <p>Business inquiries and partnership opportunities</p>
+              <a href="mailto:partner@sharaspot.com">partner@sharaspot.com</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Business Hours Section -->
+      <section class="section" style="padding-bottom: 100px;">
+        <div class="container">
+          <div class="contact-card"
+            style="text-align: center; padding: 40px; border-radius: 20px; background: white; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border: 1px solid rgba(104, 166, 186, 0.2);">
+            <h2 class="h2" style="color: var(--sage-green); margin-bottom: 20px;">Business Hours</h2>
+            <p style="font-size: 1.3rem; font-weight: 600; color: var(--powder-blue); margin-bottom: 15px;">24/7 Support
+              Available</p>
+            <p style="color: var(--light-text); font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.8;">
+              We're always here to help. Our dedicated support team is available around the clock to ensure you have the
+              best experience with SharaSpot.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- 
+    - #FOOTER
+  -->
+
+  <footer class="footer">
+    <div class="container">
+
+      <div class="footer-top section" data-reveal>
+
+        <div class="newsletter-card">
+
+          <div class="card-icon">
+            <ion-icon name="mail-unread-outline" aria-hidden="true"></ion-icon>
+          </div>
+
+          <h3 class="h3 card-title">Get EV charging updates & exclusive spots</h3>
+
+          <form class="newsletter-form">
+
+            <label for="email" class="label">Email address</label>
+
+            <input type="email" name="email" id="email" placeholder="Email address" required class="email-field">
+
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+
+          </form>
+
+        </div>
+
+        <div class="footer-list">
+
+          <p class="h6 has-after">SharaSpot Platform</p>
+
+          <p class="footer-text">
+            India's first WhatsApp-based EV charging aggregator. We're revolutionizing how EV owners discover and access
+            charging infrastructure across the country. Join the movement towards sustainable mobility.
+          </p>
+
+          <a href="#" class="btn-outline">
+            <span class="span">List Your Charging Spot</span>
+
+            <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+          </a>
+
+        </div>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="h6 has-after">Company Info</p>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">About SharaSpot</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">How It Works</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Partner With Us</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Success Stories</a>
+          </li>
+
+          <li>
+            <a href="contact.html" class="footer-link">Contact Us</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Careers</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="h6 has-after">Quick Access</p>
+          </li>
+
+          <li>
+            <address class="footer-text">
+              Available across 500+ cities in India through WhatsApp interface.
+            </address>
+          </li>
+
+          <li>
+            <p class="footer-text">
+              Need help finding a charging spot? Our WhatsApp support is available 24/7 to assist you.
+            </p>
+          </li>
+
+          <li>
+            <a href="tel:+916026004732" class="contact-link">+91 6026004732</a>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; padding: 2rem 0; border-top: 1px solid var(--light-gray);">
+
+        <ul class="footer-bottom-list" style="display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0;">
+          <li>
+            <a href="#" class="footer-bottom-link">Find Charging Spots</a>
+          </li>
+          <li>
+            <a href="#" class="footer-bottom-link">Terms of Service</a>
+          </li>
+          <li>
+            <a href="#" class="footer-bottom-link">Privacy Policy</a>
+          </li>
+        </ul>
+
+        <ul class="social-list" style="display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0;">
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-facebook" aria-hidden="true"></ion-icon>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-twitter" aria-hidden="true"></ion-icon>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-youtube" aria-hidden="true"></ion-icon>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- 
+    - #BACK TO TOP
+  -->
+
+  <a href="#top" class="back-top-btn" aria-label="go to top" data-go-top-btn>
+    <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
+  </a>
+
+  <!-- 
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/newsletter.js"></script>
+
+  <!-- Contact Form JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Custom cursor functionality
+      const cursor = document.querySelector('.custom-cursor');
+      if (cursor) {
+        document.addEventListener('mousemove', (e) => {
+          cursor.style.left = e.clientX + 'px';
+          cursor.style.top = e.clientY + 'px';
+
+          if (e.target.closest('.contact-info-card') ||
+            e.target.closest('.contact-form-card') ||
+            e.target.closest('.submit-btn') ||
+            e.target.closest('.btn') ||
+            e.target.closest('a') ||
+            e.target.closest('button')) {
+            cursor.classList.add('focused');
+          } else {
+            cursor.classList.remove('focused');
+          }
+        });
+      }
+
+      const contactForm = document.getElementById('contactForm');
+      const successMessage = document.getElementById('successMessage');
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = submitBtn.querySelector('.btn-text');
+      const btnLoading = submitBtn.querySelector('.btn-loading');
+      const btnIcon = submitBtn.querySelector('.btn-icon');
+
+      contactForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.style.display = 'none';
+        btnIcon.style.display = 'none';
+        btnLoading.style.display = 'flex';
+
+        try {
+          // Get form data
+          const formData = new FormData(contactForm);
+
+          // Submit to Formspree
+          const response = await fetch('https://formspree.io/f/xldpolld', {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
             }
-            
-            // Add hover effect to contact cards
-            const contactCards = document.querySelectorAll('.contact-card');
-            contactCards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.setProperty('--hover-scale', '1.03');
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.setProperty('--hover-scale', '1');
-                });
-            });
-            
-            // Add subtle animation to header
-            const header = document.querySelector('.header h1');
-            header.style.opacity = '0';
-            header.style.transform = 'translateY(30px)';
-            
+          });
+
+          if (response.ok) {
+            // Show success message
+            successMessage.classList.add('show');
+            contactForm.reset();
+
+            // Hide success message after 5 seconds
             setTimeout(() => {
-                header.style.transition = 'all 0.8s ease';
-                header.style.opacity = '1';
-                header.style.transform = 'translateY(0)';
-            }, 300);
-            
-            // Animate cards on scroll
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            document.querySelectorAll('.contact-card, .hours-section').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'all 0.6s ease';
-                observer.observe(el);
-            });
+              successMessage.classList.remove('show');
+            }, 5000);
+
+            // Scroll to success message
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else {
+            throw new Error('Form submission failed');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('There was an error sending your message. Please try again or contact us directly.');
+        } finally {
+          // Reset button state
+          submitBtn.disabled = false;
+          btnText.style.display = 'inline';
+          btnIcon.style.display = 'inline';
+          btnLoading.style.display = 'none';
+        }
+      });
+
+      // Form validation
+      const inputs = contactForm.querySelectorAll('input, select, textarea');
+      inputs.forEach(input => {
+        input.addEventListener('blur', function () {
+          if (this.hasAttribute('required') && !this.value.trim()) {
+            this.style.borderColor = '#e74c3c';
+          } else {
+            this.style.borderColor = 'rgba(104, 166, 186, 0.2)';
+          }
         });
 
-        function createFloatingCircles() {
-            // Create 8 floating circles
-            for (let i = 0; i < 8; i++) {
-                const circle = document.createElement('div');
-                circle.className = 'floating-circle';
-                
-                // Random size between 50px and 200px
-                const size = 50 + Math.random() * 150;
-                circle.style.width = `${size}px`;
-                circle.style.height = `${size}px`;
-                
-                // Random position
-                circle.style.left = `${Math.random() * 100}%`;
-                circle.style.top = `${Math.random() * 100}%`;
-                
-                // Random color between sage-green and powder-blue
-                const colorIntensity = 0.2 + Math.random() * 0.3;
-                if (Math.random() > 0.5) {
-                    circle.style.background = `rgba(68, 126, 196, ${colorIntensity})`;
-                } else {
-                    circle.style.background = `rgba(104, 166, 186, ${colorIntensity})`;
-                }
-                
-                // Animation with random duration and delay
-                const duration = 15 + Math.random() * 20;
-                const delay = Math.random() * 10;
-                circle.style.animation = `float ${duration}s ease-in-out infinite`;
-                circle.style.animationDelay = `${delay}s`;
-                
-                document.body.appendChild(circle);
-            }
-        }
-    </script>
+        input.addEventListener('input', function () {
+          if (this.value.trim()) {
+            this.style.borderColor = 'rgba(104, 166, 186, 0.2)';
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>
+
 </html>

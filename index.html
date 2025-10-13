@@ -36,9 +36,39 @@
   <link rel="preload" as="image" href="./assets/images/loading-circle.svg">
   <link rel="preload" as="image" href="./assets/images/hero-banner.png">
 
+  <style>
+    /* Custom cursor for desktop */
+    .custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--sage-green);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease-out, background 0.3s ease;
+      mix-blend-mode: difference;
+      opacity: 0.7;
+      display: none;
+    }
+
+    .custom-cursor.focused {
+      transform: translate(-50%, -50%) scale(1.5);
+      background: rgba(68, 126, 196, 0.2);
+    }
+
+    @media (min-width: 769px) {
+      .custom-cursor {
+        display: block;
+      }
+    }
+  </style>
+
 </head>
 
 <body id="top">
+  <div class="custom-cursor"></div>
 
   <!-- 
     - #PRELOADER
@@ -85,7 +115,7 @@
           <a href="index.html" class="navbar-link">Home</a>
         </li>
         <li class="navbar-item">
-          <a href="services.html" class="navbar-link">Services</a>
+          <a href="partner.html" class="navbar-link">Partner with us</a>
         </li>
         <li class="navbar-item">
           <a href="findspot.html" class="navbar-link">City Manager</a>
@@ -172,8 +202,8 @@
 
             </ul>
 
-            <a href="#" class="btn btn-primary">
-              <span class="span">Launching Soon</span>
+            <a href="https://wa.link/t95slp" class="btn btn-primary">
+              <span class="span">Get started now</span>
 
               <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
             </a>
@@ -552,6 +582,7 @@
     - #FOOTER
   -->
 
+ 
   <footer class="footer">
     <div class="container">
 
@@ -563,9 +594,9 @@
             <ion-icon name="mail-unread-outline" aria-hidden="true"></ion-icon>
           </div>
 
-          <h3 class="h3 card-title">Get EV charging updates & exclusive spots</h3>
+          <h3 class="h3 card-title">Get partnership updates & opportunities</h3>
 
-          <form action="#" class="newsletter-form">
+          <form class="newsletter-form">
 
             <label for="email" class="label">Email address</label>
 
@@ -582,10 +613,11 @@
           <p class="h6 has-after">SharaSpot Platform</p>
 
           <p class="footer-text">
-            India's first WhatsApp-based EV charging aggregator. We're revolutionizing how EV owners discover and access charging infrastructure across the country. Join the movement towards sustainable mobility.
+            India's first WhatsApp-based EV charging aggregator. We're revolutionizing how EV owners discover and access
+            charging infrastructure across the country. Join the movement towards sustainable mobility.
           </p>
 
-          <a href="#" class="btn-outline">
+          <a href="listspot.html" class="btn-outline">
             <span class="span">List Your Charging Spot</span>
 
             <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
@@ -600,27 +632,19 @@
           </li>
 
           <li>
-            <a href="#" class="footer-link">About SharaSpot</a>
+            <a href="index.html" class="footer-link">About SharaSpot</a>
           </li>
 
           <li>
-            <a href="#" class="footer-link">How It Works</a>
+            <a href="index.html#service" class="footer-link">How It Works</a>
           </li>
 
           <li>
-            <a href="#" class="footer-link">Partner With Us</a>
+            <a href="partner.html" class="footer-link">Partner With Us</a>
           </li>
 
           <li>
-            <a href="#" class="footer-link">Success Stories</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Contact Us</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Careers</a>
+            <a href="contact.html" class="footer-link">Contact Us</a>
           </li>
 
         </ul>
@@ -639,7 +663,7 @@
 
           <li>
             <p class="footer-text">
-              Need help finding a charging spot? Our WhatsApp support is available 24/7 to assist you.
+              Need help with partnership? Our team is available 24/7 to assist you.
             </p>
           </li>
 
@@ -651,63 +675,47 @@
 
       </div>
 
-      <div class="footer-bottom">
+      <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; padding: 2rem 0; border-top: 1px solid var(--light-gray);">
 
-        <div>
-          <ul class="footer-bottom-list">
+        <ul class="footer-bottom-list" style="display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0;">
+          <li>
+            <a href="findspot.html" class="footer-bottom-link">Find Charging Spots</a>
+          </li>
+          <li>
+            <a href="#" class="footer-bottom-link">Terms of Service</a>
+          </li>
+          <li>
+            <a href="#" class="footer-bottom-link">Privacy Policy</a>
+          </li>
+        </ul>
 
-            <li>
-              <a href="#" class="footer-bottom-link">Find Charging Spots</a>
-            </li>
-
-            <li>
-              <a href="#" class="footer-bottom-link">Terms of Service</a>
-            </li>
-
-            <li>
-              <a href="#" class="footer-bottom-link">Privacy Policy</a>
-            </li>
-
-          </ul>
-
-          <p class="copyright">Powering India's EV Revolution © SharaSpot Parking Private Limited</p>
-        </div>
-
-        <img src="./assets/images/sharaspot.png" width="100" height="63" loading="lazy" alt="SharaSpot home">
-
-        <ul class="social-list">
-
+        <ul class="social-list" style="display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0;">
           <li>
             <a href="#" class="social-link">
               <ion-icon name="logo-facebook" aria-hidden="true"></ion-icon>
             </a>
           </li>
-
           <li>
             <a href="#" class="social-link">
               <ion-icon name="logo-twitter" aria-hidden="true"></ion-icon>
             </a>
           </li>
-
           <li>
             <a href="#" class="social-link">
               <ion-icon name="logo-youtube" aria-hidden="true"></ion-icon>
             </a>
           </li>
-
           <li>
             <a href="#" class="social-link">
               <ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon>
             </a>
           </li>
-
         </ul>
 
       </div>
 
     </div>
   </footer>
-
 
 
 
@@ -728,6 +736,11 @@
     - custom js link
   -->
   <script src="./assets/js/script.js"></script>
+  
+  <!-- 
+    - newsletter subscription
+  -->
+  <script src="./assets/js/newsletter.js"></script>
 
   <!-- 
     - Counter Animation Script
@@ -785,6 +798,33 @@
     document.addEventListener('DOMContentLoaded', () => {
       const counters = document.querySelectorAll('[data-counter]');
       counters.forEach(counter => observer.observe(counter));
+    });
+  </script>
+
+  <!-- Custom Cursor Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Custom cursor functionality
+      const cursor = document.querySelector('.custom-cursor');
+      if (cursor) {
+        document.addEventListener('mousemove', (e) => {
+          cursor.style.left = e.clientX + 'px';
+          cursor.style.top = e.clientY + 'px';
+          
+          if (e.target.closest('.btn') || 
+              e.target.closest('a') ||
+              e.target.closest('button') ||
+              e.target.closest('.hero-card') ||
+              e.target.closest('.about-card') ||
+              e.target.closest('.service-item') ||
+              e.target.closest('.contact-card') ||
+              e.target.closest('.stats-card')) {
+            cursor.classList.add('focused');
+          } else {
+            cursor.classList.remove('focused');
+          }
+        });
+      }
     });
   </script>
 
