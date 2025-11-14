@@ -18,12 +18,13 @@
   -->
   <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
 
-  <!-- 
+  <!--
     - custom css link
   -->
   <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/pages.css">
 
-  <!-- 
+  <!--
     - custom font link
   -->
   <link rel="stylesheet" href="./assets/font/font.css">
@@ -36,34 +37,6 @@
   <link rel="preload" as="image" href="./assets/images/loading-circle.svg">
   <link rel="preload" as="image" href="./assets/images/hero-banner.png">
 
-  <style>
-    /* Custom cursor for desktop */
-    .custom-cursor {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--sage-green);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 9999;
-      transition: transform 0.1s ease-out, background 0.3s ease;
-      mix-blend-mode: difference;
-      opacity: 0.7;
-      display: none;
-    }
-
-    .custom-cursor.focused {
-      transform: translate(-50%, -50%) scale(1.5);
-      background: rgba(68, 126, 196, 0.2);
-    }
-
-    @media (min-width: 769px) {
-      .custom-cursor {
-        display: block;
-      }
-    }
-  </style>
 
 </head>
 
@@ -94,18 +67,7 @@
     <!-- Logo + Brand Text -->
     <a href="#" class="logo" style="display: flex; align-items: center; gap: 8px;">
       <img src="./assets/images/loading.png" width="60" height="60" alt="SharaSpot home">
-      <span style="
-  color: rgb(232, 224, 224);
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 3rem;
-  letter-spacing: 1.5px;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.15);
-  transition: all 0.3s ease;
-" onmouseover="this.style.color='#ffffff'; this.style.textShadow='0 2px 5px rgba(0,0,0,0.2)';"
-  onmouseout="this.style.color='rgb(232, 224, 224)'; this.style.textShadow='0 1px 3px rgba(0,0,0,0.15)';"
->SharaSpot</span>
+      <span class="brand-text">SharaSpot</span>
     </a>
 
     <!-- Navigation -->
@@ -675,9 +637,9 @@
 
       </div>
 
-      <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; padding: 2rem 0; border-top: 1px solid var(--light-gray);">
+      <div class="footer-bottom">
 
-        <ul class="footer-bottom-list" style="display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0;">
+        <ul class="footer-bottom-list">
           <li>
             <a href="findspot.html" class="footer-bottom-link">Find Charging Spots</a>
           </li>
@@ -689,7 +651,7 @@
           </li>
         </ul>
 
-        <ul class="social-list" style="display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0;">
+        <ul class="social-list">
           <li>
             <a href="#" class="social-link">
               <ion-icon name="logo-facebook" aria-hidden="true"></ion-icon>
